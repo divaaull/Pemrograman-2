@@ -1,0 +1,25 @@
+-- =========================
+-- 1. Buat Database
+-- =========================
+CREATE DATABASE IF NOT EXISTS pemrograman2mhs;
+USE pemrograman2mhs;
+
+-- =========================
+-- 2. Buat Tabel datamhs
+-- =========================
+CREATE TABLE IF NOT EXISTS datamhs (
+    nim VARCHAR(20) NOT NULL PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    semester INT NOT NULL,
+    kelas VARCHAR(10) NOT NULL
+);
+
+-- =========================
+-- 3. Insert Data ke tabel datamhs
+-- =========================
+INSERT INTO datamhs (nim, nama, semester, kelas) VALUES
+('231011400588', 'Diva', 6, '06TPLM005'),
+('231011400580', 'Rabin', 6, '06TPLM001'),
+('231011400599', 'Furab', 6, '06TPLM002'),
+('23101140999',  'Nadia', 6, '06TPLM005'),
+
