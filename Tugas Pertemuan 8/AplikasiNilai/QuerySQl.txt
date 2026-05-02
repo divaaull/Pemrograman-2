@@ -1,0 +1,109 @@
+-- ============================================================
+--  DATABASE: Aplikasi Administrasi Nilai Mahasiswa
+--  Pemrograman 2 - Pertemuan 8
+-- ============================================================
+
+-- 1. Buat & pilih database
+CREATE DATABASE IF NOT EXISTS db_nilai_mahasiswa;
+USE db_nilai_mahasiswa;
+
+-- ============================================================
+--  BUAT TABEL MAHASISWA
+-- ============================================================
+CREATE TABLE IF NOT EXISTS mahasiswa (
+    nim         VARCHAR(20)     PRIMARY KEY,
+    nama        VARCHAR(100)    NOT NULL,
+    nilai_tugas DOUBLE          NOT NULL DEFAULT 0,
+    nilai_uts   DOUBLE          NOT NULL DEFAULT 0,
+    nilai_uas   DOUBLE          NOT NULL DEFAULT 0,
+    created_at  TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ============================================================
+--  INSERT DATA CONTOH
+-- ============================================================
+INSERT INTO mahasiswa (nim, nama, nilai_tugas, nilai_uts, nilai_uas) VALUES
+('2301001', 'Andi Saputra',   85, 80, 90),
+('2301002', 'Budi Santoso',   70, 65, 75),
+('2301003', 'Citra Dewi',     50, 55, 45),
+('2301004', 'Dian Pratama',   90, 88, 92),
+('2301005', 'Eva Rahayu',     60, 70, 65);
+
+-- ============================================================
+--  CEK DATA
+-- ============================================================
+
+-- Lihat semua data + nilai akhir + grade (dihitung langsung)
+SELECT
+    nim,
+    nama,
+    nilai_tugas,
+    nilai_uts,
+    nilai_uas,
+    ROUND((nilai_tugas * 0.30) + (nilai_uts * 0.30) + (nilai_uas * 0.40), 2) AS nilai_akhir,
+    CASE
+        WHEN (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 85 THEN 'A'
+        WHEN (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 75 THEN 'B'
+        WHEN (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 65 THEN 'C'
+        WHEN (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 55 THEN 'D'
+        ELSE 'E'
+    END AS grade
+FROM mahasiswa
+ORDER BY nim;
+
+-- ============================================================
+--  QUERY OPERASIONAL (CRUD)
+-- ============================================================
+
+-- Tambah mahasiswa baru
+INSERT INTO mahasiswa (nim, nama, nilai_tugas, nilai_uts, nilai_uas)
+VALUES ('2301006', 'Fajar Nugroho', 78, 82, 80);
+
+-- Update nilai mahasiswa berdasarkan NIM
+UPDATE mahasiswa
+SET nilai_tugas = 88, nilai_uts = 85, nilai_uas = 90
+WHERE nim = '2301001';
+
+-- Hapus mahasiswa berdasarkan NIM
+DELETE FROM mahasiswa WHERE nim = '2301006';
+
+-- Cari mahasiswa berdasarkan NIM
+SELECT * FROM mahasiswa WHERE nim = '2301001';
+
+-- Cari mahasiswa berdasarkan nama (LIKE)
+SELECT * FROM mahasiswa WHERE nama LIKE '%andi%';
+
+-- ============================================================
+--  QUERY STATISTIK
+-- ============================================================
+
+-- Rata-rata nilai akhir seluruh mahasiswa
+SELECT ROUND(AVG(nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40), 2) AS rata_rata
+FROM mahasiswa;
+
+-- Jumlah mahasiswa lulus (grade bukan E / nilai akhir >= 55)
+SELECT COUNT(*) AS jumlah_lulus
+FROM mahasiswa
+WHERE (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 55;
+
+-- Jumlah mahasiswa per grade
+SELECT
+    CASE
+        WHEN (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 85 THEN 'A'
+        WHEN (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 75 THEN 'B'
+        WHEN (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 65 THEN 'C'
+        WHEN (nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40) >= 55 THEN 'D'
+        ELSE 'E'
+    END AS grade,
+    COUNT(*) AS jumlah
+FROM mahasiswa
+GROUP BY grade
+ORDER BY grade;
+
+-- Mahasiswa dengan nilai akhir tertinggi
+SELECT nim, nama,
+    ROUND((nilai_tugas*0.30 + nilai_uts*0.30 + nilai_uas*0.40), 2) AS nilai_akhir
+FROM mahasiswa
+ORDER BY nilai_akhir DESC
+LIMIT 1;

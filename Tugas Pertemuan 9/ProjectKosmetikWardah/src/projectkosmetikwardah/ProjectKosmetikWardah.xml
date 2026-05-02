@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\user\OneDrive\Dokumen\Semester 6\pemrograman 2\Tugas Pertemuan 8\AplikasiAdministrasiNilai\dist\AplikasiAdministrasiNilai.jar</jar>
+  <outfile>C:\Users\user\OneDrive\Dokumen\Semester 6\pemrograman 2\Tugas Pertemuan 8\AplikasiAdministrasiNilai\dist\AplikasiAdministrasiNilai.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <classPath>
+    <mainClass>Nilai</mainClass>
+    <cp>AplikasiAdministrasiNilai.jar</cp>
+  </classPath>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>true</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion></minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>

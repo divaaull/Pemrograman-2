@@ -1,0 +1,45 @@
+CREATE DATABASE IF NOT EXISTS db_penjualan;
+USE db_penjualan;
+
+CREATE TABLE IF NOT EXISTS barang (
+    kode VARCHAR(10) PRIMARY KEY,
+    nama VARCHAR(50) NOT NULL,
+    harga DECIMAL(10,2) NOT NULL,
+    stok INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS customer (
+    id VARCHAR(10) PRIMARY KEY,
+    nama VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS supplier (
+    id VARCHAR(10) PRIMARY KEY,
+    nama VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS transaksi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_customer VARCHAR(10),
+    kode_barang VARCHAR(10),
+    jumlah INT NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    tgl TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_customer) REFERENCES customer(id),
+    FOREIGN KEY (kode_barang) REFERENCES barang(kode)
+);
+
+-- Barang Wardah
+INSERT INTO barang VALUES ('B001','Wardah Lipstick',50000,20);
+INSERT INTO barang VALUES ('B002','Wardah Foundation',120000,15);
+
+-- Customer
+INSERT INTO customer VALUES ('C001','Ayu');
+INSERT INTO customer VALUES ('C002','Rina');
+
+-- Supplier
+INSERT INTO supplier VALUES ('S001','PT Kosmetik Wardah');
+
+-- Transaksi contoh
+INSERT INTO transaksi (id_customer,kode_barang,jumlah,total) 
+VALUES ('C001','B001',2,100000);
