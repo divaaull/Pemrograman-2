@@ -1,0 +1,148 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Activity Diagram">
+    <mxGraphModel dx="1434" dy="794" grid="1" gridSize="10"
+      guides="1" tooltips="1" connect="1" arrows="1"
+      fold="1" page="1" pageScale="1"
+      pageWidth="1169" pageHeight="827">
+
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ADMIN -->
+        <mxCell id="admin" value="Admin"
+          style="swimlane;horizontal=0;startSize=30;"
+          vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="700" height="900" as="geometry"/>
+        </mxCell>
+
+        <!-- SYSTEM -->
+        <mxCell id="system" value="System"
+          style="swimlane;horizontal=0;startSize=30;"
+          vertex="1" parent="1">
+          <mxGeometry x="700" y="0" width="450" height="900" as="geometry"/>
+        </mxCell>
+
+        <!-- START -->
+        <mxCell id="start"
+          style="ellipse;html=1;fillColor=#000000;"
+          vertex="1" parent="admin">
+          <mxGeometry x="320" y="40" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- MENU -->
+        <mxCell id="menu"
+          value="Pilih menu 'Kelola Produk'"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="240" y="100" width="200" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- SYSTEM LIST -->
+        <mxCell id="list"
+          value="Menampilkan daftar produk"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="system">
+          <mxGeometry x="90" y="100" width="230" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- DECISION -->
+        <mxCell id="decision"
+          value="Pilih aksi"
+          style="rhombus;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="295" y="210" width="90" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- TAMBAH -->
+        <mxCell id="t1"
+          value="Isi data produk"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="40" y="360" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="t2"
+          value="Tekan tombol 'Simpan'"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="40" y="460" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- EDIT -->
+        <mxCell id="e1"
+          value="Pilih produk yang akan diedit"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="260" y="360" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2"
+          value="Ubah data produk"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="260" y="460" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3"
+          value="Tekan tombol 'Simpan'"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="260" y="560" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- HAPUS -->
+        <mxCell id="h1"
+          value="Pilih produk yang akan dihapus"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="500" y="360" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="h2"
+          value="Konfirmasi hapus"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="500" y="460" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="h3"
+          value="Tekan tombol 'Hapus'"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="admin">
+          <mxGeometry x="500" y="560" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- SYSTEM PROCESS -->
+        <mxCell id="proc"
+          value="Memproses perubahan data&#xa;(insert / update / delete)"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="system">
+          <mxGeometry x="70" y="620" width="270" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="reload"
+          value="Memuat ulang data produk"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="system">
+          <mxGeometry x="90" y="730" width="230" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="notif"
+          value="Menampilkan notifikasi&#xa;'Produk berhasil diperbarui'"
+          style="rounded=1;whiteSpace=wrap;html=1;"
+          vertex="1" parent="system">
+          <mxGeometry x="70" y="820" width="270" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- END -->
+        <mxCell id="end"
+          style="ellipse;shape=doubleEllipse;html=1;"
+          vertex="1" parent="system">
+          <mxGeometry x="190" y="910" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
