@@ -1,0 +1,130 @@
+/* Sidebar menu */
+#menu { 
+    width: 200px;
+    float: left;
+    background: #f0f0f0;
+    padding: 10px;
+    box-shadow: 2px 2px 5px #aaa;
+    border-radius: 10px;
+    list-style: none;
+}
+
+/* Sidebar links */
+#menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; 
+}
+#menu li {
+    margin-bottom: 5px;
+}
+#menu a:link, #menu a:visited {
+    display: block;
+    padding: 5px 5px;
+    border-left: 6px solid #577927;
+    border-right: 6px solid #577927; 
+    background-color: #c4c0f1; 
+    color: #965180;
+    text-decoration: none;
+    border-radius: 3px;
+}
+#menu a:hover {
+    background-color: #697269;
+    color: #FFFFFF;
+}
+
+/* Top menu */
+nav ul {
+    background: #efefef; 
+    background: linear-gradient(to bottom, #efefef 0%, #bbbbbb 100%);
+    box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
+    padding: 0 20px;
+    border-radius: 10px; 
+    list-style: none;
+    position: relative; 
+    display: inline-table;
+    margin-left: 220px; /* align with content */
+}
+nav ul li {
+    float: left;
+}
+nav ul li a {
+    display: block;
+    padding: 8px 15px;
+    color: #757575;
+    text-decoration: none;
+}
+nav ul li:hover {
+    background: #4b545f;
+    background: linear-gradient(to bottom, #4f5964 0%, #5f6975 40%);
+}
+nav ul li:hover a {
+    color: #fff;
+}
+
+/* Dropdown menus */
+nav ul ul {
+    display: none; 
+    background: #5f6975;
+    border-radius: 0px; 
+    padding: 0;
+    position: absolute; 
+    top: 100%;
+}
+nav ul li:hover > ul {
+    display: block;
+}
+nav ul ul li {
+    float: none; 
+    border-top: 1px solid #6b727c;
+    border-bottom: 1px solid #575f6a;
+    position: relative;
+}
+nav ul ul li a { 
+    padding: 5px 20px; 
+    color: #fff;
+}
+nav ul ul li a:hover {
+    background: #4b545f;
+}
+nav ul ul ul { 
+    position: absolute; left: 100%; top:0;
+}
+
+/* Konten utama */
+#konten {
+    margin-left: 220px; /* supaya tidak menumpuk menu */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* Form input fields */
+#konten input[type=text],
+#konten input[type=number] {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Buttons */
+#konten input[type=submit],
+#konten input[type=reset],
+#konten input[type=button] {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f5f5f5;
+}

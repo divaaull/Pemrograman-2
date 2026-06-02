@@ -1,0 +1,116 @@
+CREATE DATABASE IF NOT EXISTS db_rentcar_diva;
+USE db_rentcar_diva;
+
+-- =============================================
+-- TABEL ADMIN
+-- =============================================
+CREATE TABLE IF NOT EXISTS admin (
+  id_admin   INT(11) NOT NULL AUTO_INCREMENT,
+  username   VARCHAR(50) NOT NULL,
+  password   VARCHAR(255) NOT NULL,
+  nama       VARCHAR(100),
+  PRIMARY KEY (id_admin)
+) ENGINE=InnoDB;
+
+-- =============================================
+-- TABEL MOBIL (Master)
+-- =============================================
+CREATE TABLE IF NOT EXISTS mobil (
+  id_mobil    VARCHAR(20) NOT NULL,
+  nama_mobil  VARCHAR(100) NOT NULL,
+  merk        VARCHAR(50),
+  tahun       YEAR,
+  warna       VARCHAR(30),
+  nopol       VARCHAR(20) NOT NULL,
+  kapasitas   INT(2),
+  harga_sewa  DECIMAL(12,2) NOT NULL,
+  status      ENUM('tersedia','disewa','perawatan') DEFAULT 'tersedia',
+  keterangan  TEXT,
+  PRIMARY KEY (id_mobil)
+) ENGINE=InnoDB;
+
+-- =============================================
+-- TABEL CUSTOMER (Master)
+-- =============================================
+CREATE TABLE IF NOT EXISTS customer (
+  id_customer  VARCHAR(20) NOT NULL,
+  nama         VARCHAR(100) NOT NULL,
+  nik          VARCHAR(20) NOT NULL,
+  no_hp        VARCHAR(20),
+  email        VARCHAR(100),
+  alamat       TEXT,
+  no_sim       VARCHAR(20),
+  tgl_daftar   DATE,
+  PRIMARY KEY (id_customer)
+) ENGINE=InnoDB;
+
+-- =============================================
+-- TABEL TRANSAKSI SEWA
+-- =============================================
+CREATE TABLE IF NOT EXISTS transaksi_sewa (
+  id_sewa       VARCHAR(20) NOT NULL,
+  id_customer   VARCHAR(20) NOT NULL,
+  id_mobil      VARCHAR(20) NOT NULL,
+  tgl_sewa      DATE NOT NULL,
+  tgl_kembali   DATE NOT NULL,
+  lama_sewa     INT(5),
+  total_biaya   DECIMAL(12,2),
+  dp            DECIMAL(12,2) DEFAULT 0,
+  status_sewa   ENUM('aktif','selesai','batal') DEFAULT 'aktif',
+  keterangan    TEXT,
+  PRIMARY KEY (id_sewa),
+  FOREIGN KEY (id_customer) REFERENCES customer(id_customer),
+  FOREIGN KEY (id_mobil)    REFERENCES mobil(id_mobil)
+) ENGINE=InnoDB;
+
+-- =============================================
+-- TABEL PENGEMBALIAN
+-- =============================================
+CREATE TABLE IF NOT EXISTS pengembalian (
+  id_kembali     VARCHAR(20) NOT NULL,
+  id_sewa        VARCHAR(20) NOT NULL,
+  tgl_aktual     DATE NOT NULL,
+  denda          DECIMAL(12,2) DEFAULT 0,
+  total_bayar    DECIMAL(12,2),
+  kondisi_mobil  ENUM('baik','rusak ringan','rusak berat') DEFAULT 'baik',
+  keterangan     TEXT,
+  PRIMARY KEY (id_kembali),
+  FOREIGN KEY (id_sewa) REFERENCES transaksi_sewa(id_sewa)
+) ENGINE=InnoDB;
+
+-- =============================================
+-- DATA AWAL
+-- =============================================
+-- Admin default: username=admin, password=admin123
+INSERT IGNORE INTO admin (username, password, nama)
+VALUES ('admin', '0192023a7bbd73250516f069df18b500', 'Administrator');
+
+-- Contoh data mobil
+INSERT IGNORE INTO mobil VALUES
+('MBL001','Avanza','Toyota',2022,'Putih','B 1234 ABC',7,350000,'tersedia',''),
+('MBL002','Innova','Toyota',2023,'Hitam','B 5678 DEF',8,500000,'tersedia',''),
+('MBL003','Xpander','Mitsubishi',2022,'Silver','B 9999 GHI',7,450000,'tersedia','');
+
+-- Contoh data customer
+INSERT IGNORE INTO customer VALUES
+('CST001','Budi Santoso','3201010101010001','08123456789','budi@email.com','Jakarta','SIM001','2024-01-01'),
+('CST002','Siti Rahayu','3201020202020002','08987654321','siti@email.com','Depok','SIM002','2024-01-05');
+
+USE db_rentcar_diva;
+
+SELECT 
+    t.id_sewa, 
+    c.nama AS nama_customer, 
+    m.nama_mobil, 
+    m.nopol,
+    t.tgl_sewa, 
+    t.tgl_kembali AS tgl_rencana,
+    IFNULL(p.tgl_aktual, '-') AS tgl_realisasi,
+    t.total_biaya,
+    IFNULL(p.denda, 0) AS denda,
+    t.status_sewa
+FROM transaksi_sewa t
+JOIN customer c ON t.id_customer = c.id_customer
+JOIN mobil m ON t.id_mobil = m.id_mobil
+LEFT JOIN pengembalian p ON t.id_sewa = p.id_sewa
+WHERE t.tgl_sewa BETWEEN '2026-01-01' AND '2026-06-01';
